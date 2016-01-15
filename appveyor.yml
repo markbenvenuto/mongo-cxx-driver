@@ -13,7 +13,13 @@ test: off
 build_script:
   - cmd: git clone -b master https://github.com/mongodb/mongo-c-driver.git
   - cmd: cd mongo-c-driver
+  - cmd: git submodule init
+  - cmd: git submoudle update
+  - cmd: cd src\libbson
   - cmd: cmake.exe -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=C:\usr
+  - cmd: msbuild INSTALL.vcxproj
+  - cmd: cd ..\..
+  - cmd: cmake.exe -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=C:\usr -DBSON_ROOT_DIR=C:\usr
   - cmd: msbuild INSTALL.vcxproj
   - cmd: cd /d c:\build
   - cmd: cmake.exe -G "Visual Studio 14 2015 Win64" -DLIBBSON_DIR=c:\usr -DLIBMONGOC_DIR=c:\usr -DBSONCXX_POLY_USE_BOOST=1 -DBOOST_ROOT=c:\Libraries\boost_1_59_0 %*
