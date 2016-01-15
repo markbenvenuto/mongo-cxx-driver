@@ -1,0 +1,21 @@
+version: 3.0.0.{build}
+
+branches:
+  only:
+    - cf
+
+clone_folder: c:\build
+
+os: Visual Studio 2015
+
+test: off
+
+build_script:
+  - cmd: git clone -b master https://github.com/mongodb/mongo-c-driver.git
+  - cmd: cd mongo-c-driver
+  - cmd: cmake.exe -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=C:\usr
+  - cmd: msbuild INSTALL.vcxproj
+  - cmd: cd /d c:\build
+  - cmd: cmake.exe -G "Visual Studio 14 2015 Win64" -DLIBBSON_DIR=c:\usr -DLIBMONGOC_DIR=c:\usr -DBSONCXX_POLY_USE_BOOST=1 -DBOOST_ROOT=c:\Libraries\boost_1_59_0 %*
+  - cmd: msbuild.exe ALL_BUILD.vcxproj
+
