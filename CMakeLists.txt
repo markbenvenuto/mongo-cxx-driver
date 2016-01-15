@@ -89,10 +89,12 @@ add_custom_target(modernize
 )
 
 add_custom_target(format
-    perl -nle "/file/ or next; print ((split /: (.*)/)[1])" ${CMAKE_BINARY_DIR}/compile_commands.json |
-    grep -v "catch.hpp" |
-    grep -v "examples" |
-    xargs clang-format -i
+    python etc/clang_format.py format
+    VERBATIM
+)
+
+add_custom_target(lint
+    python etc/clang_format.py lint
     VERBATIM
 )
 
