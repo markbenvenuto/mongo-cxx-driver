@@ -9,3 +9,9 @@
 
 # OSX
 .DS_Store
+
+CMakeFiles/
+*.dir/
+*.cmake
+*.vcxproj
+*.vcxproj.filters

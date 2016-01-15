@@ -123,7 +123,7 @@ add_library(mongocxx_mocked STATIC
 )
 
 target_compile_definitions(mongocxx_mocked PUBLIC MONGOCXX_STATIC MONGOCXX_TESTING)
-
+target_compile_options(mongocxx_mocked PRIVATE /bigobj)
 set_target_properties(mongocxx_mocked PROPERTIES
     OUTPUT_NAME mongocxx_mocked
     VERSION ${MONGOCXX_VERSION}
